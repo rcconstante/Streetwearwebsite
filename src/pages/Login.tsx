@@ -2,43 +2,8 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Footer from '@/components/Footer';
+import FloatingNavBar from '@/components/FloatingNavBar';
 import { Link } from 'react-router-dom';
-
-const StaticNavBar = () => {
-  return (
-    <nav className="bg-white shadow-sm">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          <div className="flex items-center space-x-8">
-            <Link to="/" className="text-sm font-medium tracking-wide text-gray-900 hover:text-gray-600 transition-colors">
-              New Arrivals
-            </Link>
-            <Link to="/" className="text-sm font-medium tracking-wide text-gray-900 hover:text-gray-600 transition-colors">
-              Shop
-            </Link>
-            <Link to="/" className="text-sm font-medium tracking-wide text-gray-900 hover:text-gray-600 transition-colors">
-              Collections
-            </Link>
-          </div>
-
-          <div className="absolute left-1/2 transform -translate-x-1/2">
-            <Link to="/" className="flex items-center">
-              <span className="text-2xl font-bold tracking-tighter text-gray-900">
-                STREETWEAR
-              </span>
-            </Link>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <Link to="/login" className="text-sm font-medium text-gray-900 hover:text-gray-600 transition-colors">
-              Login
-            </Link>
-          </div>
-        </div>
-      </div>
-    </nav>
-  );
-};
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -51,9 +16,9 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <StaticNavBar />
+      <FloatingNavBar />
       
-      <div className="flex-1 flex items-center justify-center px-4 py-20">
+      <div className="flex-1 flex items-center justify-center px-4 pt-32 pb-20">
         <div className="w-full max-w-md bg-gray-50 rounded-2xl p-12 shadow-sm">
           <h1 className="text-4xl font-bold text-center mb-8">Login</h1>
           

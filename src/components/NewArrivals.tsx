@@ -2,7 +2,7 @@ import { Badge } from './ui/badge';
 import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useState } from 'react';
+import { useRef } from 'react';
 
 interface Product {
   id: number;
@@ -58,21 +58,21 @@ const allProducts: Product[] = [
 ];
 
 const NewArrivals = () => {
-  const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 4;
-  const totalPages = Math.ceil(allProducts.length / itemsPerPage);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const currentProducts = allProducts.slice(
-    currentPage * itemsPerPage,
-    (currentPage + 1) * itemsPerPage
-  );
-
-  const handleNext = () => {
-    setCurrentPage((prev) => (prev + 1) % totalPages);
-  };
-
-  const handlePrev = () => {
-    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 320;
+      const newScrollLeft = 
+        direction === 'left' 
+          ? scrollContainerRef.current.scrollLeft - scrollAmount
+          : scrollContainerRef.current.scrollLeft + scrollAmount;
+      
+      scrollContainerRef.current.scrollTo({
+        left: newScrollLeft,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
@@ -86,34 +86,34 @@ const NewArrivals = () => {
         </div>
 
         <div className="relative">
-          {/* Navigation Arrows */}
-          {totalPages > 1 && (
-            <>
-              <Button
-                variant="outline"
-                size="icon"
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg hover:bg-gray-100 rounded-full w-12 h-12 -ml-6"
-                onClick={handlePrev}
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </Button>
+          {/* Left Arrow */}
+          <Button
+            variant="outline"
+            size="icon"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg hover:bg-gray-100 rounded-full w-12 h-12"
+            onClick={() => scroll('left')}
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </Button>
 
-              <Button
-                variant="outline"
-                size="icon"
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg hover:bg-gray-100 rounded-full w-12 h-12 -mr-6"
-                onClick={handleNext}
-              >
-                <ChevronRight className="w-6 h-6" />
-              </Button>
-            </>
-          )}
+          {/* Right Arrow */}
+          <Button
+            variant="outline"
+            size="icon"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg hover:bg-gray-100 rounded-full w-12 h-12"
+            onClick={() => scroll('right')}
+          >
+            <ChevronRight className="w-6 h-6" />
+          </Button>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {currentProducts.map((product) => (
+          <div 
+            ref={scrollContainerRef}
+            className="flex overflow-x-auto gap-6 pb-4 scrollbar-hide px-12"
+          >
+            {allProducts.map((product) => (
               <Card
                 key={product.id}
-                className="group overflow-hidden border-0 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer"
+                className="flex-shrink-0 w-72 group overflow-hidden border-0 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer bg-white"
               >
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden bg-gray-50">
@@ -138,24 +138,6 @@ const NewArrivals = () => {
               </Card>
             ))}
           </div>
-
-          {/* Page Indicators */}
-          {totalPages > 1 && (
-            <div className="flex justify-center gap-2 mt-8">
-              {Array.from({ length: totalPages }).map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentPage(index)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    index === currentPage
-                      ? 'bg-black w-8'
-                      : 'bg-gray-300 hover:bg-gray-400'
-                  }`}
-                  aria-label={`Go to page ${index + 1}`}
-                />
-              ))}
-            </div>
-          )}
         </div>
       </div>
     </section>
