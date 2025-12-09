@@ -1,9 +1,8 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import Footer from '@/components/Footer';
-import FloatingNavBar from '@/components/FloatingNavBar';
-import { Link } from 'react-router-dom';
+import { Label } from '@/components/ui/label';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -11,69 +10,68 @@ const Login = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Login attempt with:', { email, password });
+    console.log('Login attempt:', { email, password });
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <FloatingNavBar />
+    <div className="min-h-screen bg-gray-50">
+      <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm py-6">
+        <div className="flex justify-center">
+          <Link to="/">
+            <img src="/CropCenter.png" alt="Logo" className="h-8 md:h-10" />
+          </Link>
+        </div>
+      </div>
       
-      <div className="flex-1 flex items-center justify-center px-4 pt-32 pb-20">
-        <div className="w-full max-w-md bg-gray-50 rounded-2xl p-12 shadow-sm">
-          <h1 className="text-4xl font-bold text-center mb-8">Login</h1>
+      <div className="container mx-auto px-4 pt-32 pb-20">
+        <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg p-8">
+          <h1 className="text-3xl font-bold text-center mb-2">Welcome Back</h1>
+          <p className="text-gray-600 text-center mb-8">Sign in to your account</p>
           
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
               <Input
+                id="email"
                 type="email"
-                placeholder="E-mail"
+                placeholder="your@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full h-12 px-4 bg-white border-gray-200 rounded-lg"
                 required
               />
             </div>
             
-            <div>
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
               <Input
+                id="password"
                 type="password"
-                placeholder="Password"
+                placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full h-12 px-4 bg-white border-gray-200 rounded-lg"
                 required
               />
             </div>
-
-            <div className="text-left">
-              <a
-                href="/forgot-password"
-                className="text-sm text-gray-900 underline hover:text-gray-600 transition-colors"
-              >
+            
+            <div className="flex justify-end">
+              <Link to="#" className="text-sm text-gray-600 hover:text-gray-900">
                 Forgot your password?
-              </a>
-            </div>
-
-            <Button
-              type="submit"
-              className="w-full h-12 bg-white text-black border-2 border-black hover:bg-black hover:text-white transition-all font-medium text-base rounded-lg"
-            >
-              LOGIN
-            </Button>
-
-            <div className="text-center">
-              <Link
-                to="/signup"
-                className="text-sm text-gray-900 underline hover:text-gray-600 transition-colors"
-              >
-                Sign up
               </Link>
             </div>
+            
+            <Button type="submit" className="w-full bg-black hover:bg-gray-800 text-white">
+              LOGIN
+            </Button>
+            
+            <p className="text-center text-sm text-gray-600">
+              Don't have an account?{' '}
+              <Link to="/signup" className="font-semibold text-black hover:underline">
+                Sign up
+              </Link>
+            </p>
           </form>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };

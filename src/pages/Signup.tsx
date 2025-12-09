@@ -1,113 +1,127 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import Footer from '@/components/Footer';
-import FloatingNavBar from '@/components/FloatingNavBar';
-import { Link } from 'react-router-dom';
+import { Label } from '@/components/ui/label';
 
-const SignUp = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+const Signup = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
+    if (formData.password !== formData.confirmPassword) {
       alert('Passwords do not match!');
       return;
     }
-    console.log('Sign up attempt with:', { firstName, lastName, email, password });
+    console.log('Signup attempt:', formData);
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <FloatingNavBar />
+    <div className="min-h-screen bg-gray-50">
+      <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm py-6">
+        <div className="flex justify-center">
+          <Link to="/">
+            <img src="/CropCenter.png" alt="Logo" className="h-8 md:h-10" />
+          </Link>
+        </div>
+      </div>
       
-      <div className="flex-1 flex items-center justify-center px-4 pt-32 pb-20">
-        <div className="w-full max-w-md bg-gray-50 rounded-2xl p-12 shadow-sm">
-          <h1 className="text-4xl font-bold text-center mb-8">Sign Up</h1>
+      <div className="container mx-auto px-4 pt-32 pb-20">
+        <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg p-8">
+          <h1 className="text-3xl font-bold text-center mb-2">Create Account</h1>
+          <p className="text-gray-600 text-center mb-8">Join our streetwear community</p>
           
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <Input
-                type="text"
-                placeholder="First Name"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                className="w-full h-12 px-4 bg-white border-gray-200 rounded-lg"
-                required
-              />
-            </div>
-
-            <div>
-              <Input
-                type="text"
-                placeholder="Last Name"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                className="w-full h-12 px-4 bg-white border-gray-200 rounded-lg"
-                required
-              />
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="firstName">First Name</Label>
+                <Input
+                  id="firstName"
+                  type="text"
+                  placeholder="John"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="lastName">Last Name</Label>
+                <Input
+                  id="lastName"
+                  type="text"
+                  placeholder="Doe"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
             </div>
             
-            <div>
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
               <Input
+                id="email"
                 type="email"
-                placeholder="E-mail"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full h-12 px-4 bg-white border-gray-200 rounded-lg"
+                placeholder="your@email.com"
+                value={formData.email}
+                onChange={handleChange}
                 required
               />
             </div>
             
-            <div>
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
               <Input
+                id="password"
                 type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full h-12 px-4 bg-white border-gray-200 rounded-lg"
+                placeholder="••••••••"
+                value={formData.password}
+                onChange={handleChange}
                 required
               />
             </div>
-
-            <div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="confirmPassword">Confirm Password</Label>
               <Input
+                id="confirmPassword"
                 type="password"
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full h-12 px-4 bg-white border-gray-200 rounded-lg"
+                placeholder="••••••••"
+                value={formData.confirmPassword}
+                onChange={handleChange}
                 required
               />
             </div>
-
-            <Button
-              type="submit"
-              className="w-full h-12 bg-white text-black border-2 border-black hover:bg-black hover:text-white transition-all font-medium text-base rounded-lg"
-            >
+            
+            <Button type="submit" className="w-full bg-black hover:bg-gray-800 text-white">
               CREATE ACCOUNT
             </Button>
-
-            <div className="text-center">
-              <span className="text-sm text-gray-600">Already have an account? </span>
-              <Link
-                to="/login"
-                className="text-sm text-gray-900 underline hover:text-gray-600 transition-colors"
-              >
+            
+            <p className="text-center text-sm text-gray-600">
+              Already have an account?{' '}
+              <Link to="/login" className="font-semibold text-black hover:underline">
                 Login
               </Link>
-            </div>
+            </p>
           </form>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };
 
-export default SignUp;
+export default Signup;

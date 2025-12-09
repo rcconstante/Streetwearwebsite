@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import FloatingNavBar from '@/components/FloatingNavBar';
 import SimpleHero from '@/components/SimpleHero';
 import NewArrivals from '@/components/NewArrivals';
-import BestSellersBanner from '@/components/BestSellersBanner';
-import BestSellersRow from '@/components/BestSellersRow';
-import ThemeCollections from '@/components/ThemeCollections';
-import BrandFeatureBar from '@/components/BrandFeatureBar';
+import ServicesSection from '@/components/ServicesSection';
+import GraphicsCollection from '@/components/GraphicsCollection';
+import BlanksCollection from '@/components/BlanksCollection';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import Newsletter from '@/components/Newsletter';
 import Footer from '@/components/Footer';
 
@@ -22,10 +22,10 @@ const Index = () => {
 
       {/* New Sections */}
       <NewArrivals />
-      <BestSellersBanner />
-      <BestSellersRow />
-      <ThemeCollections />
-      <BrandFeatureBar />
+      <ServicesSection />
+      <GraphicsCollection />
+      <BlanksCollection />
+      <TestimonialsSection />
       <Newsletter />
       <Footer />
     </div>
