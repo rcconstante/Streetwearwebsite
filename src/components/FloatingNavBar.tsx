@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Search, ShoppingCart, User, ChevronDown, Menu } from 'lucide-react';
+import { Search, ShoppingCart, User, ChevronDown, Menu, X } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 
@@ -25,6 +25,7 @@ const FloatingNavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showShopDropdown, setShowShopDropdown] = useState(false);
   const [showCollectionsDropdown, setShowCollectionsDropdown] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const shopTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const collectionsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -36,6 +37,17 @@ const FloatingNavBar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
 
   const handleShopEnter = () => {
     if (shopTimeoutRef.current) {
@@ -131,13 +143,14 @@ const FloatingNavBar = () => {
             <Button
               variant="ghost"
               size="icon"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`md:hidden transition-colors ${
                 isScrolled
                   ? 'text-gray-900 hover:text-gray-600'
                   : 'text-white hover:text-gray-300'
               }`}
             >
-              <Menu className="h-6 w-6" />
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
 
             {/* Center Logo */}
@@ -239,6 +252,99 @@ const FloatingNavBar = () => {
                   {category.name}
                 </a>
               ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-50 md:hidden">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black/50"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          
+          {/* Menu Content */}
+          <div className="absolute top-0 right-0 bottom-0 w-[85%] max-w-sm bg-white shadow-xl overflow-y-auto">
+            <div className="p-6">
+              {/* Close Button */}
+              <div className="flex justify-end mb-8">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-gray-900"
+                >
+                  <X className="h-6 w-6" />
+                </Button>
+              </div>
+
+              {/* Menu Items */}
+              <nav className="space-y-6">
+                <a
+                  href="#new-arrivals"
+                  className="block text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  New Arrivals
+                </a>
+
+                {/* Shop Section */}
+                <div className="space-y-3">
+                  <h3 className="text-lg font-bold text-gray-900">Shop</h3>
+                  <div className="pl-4 space-y-2">
+                    {shopCategories.map((category) => (
+                      <a
+                        key={category.name}
+                        href={category.href}
+                        className="block text-base text-gray-700 hover:text-gray-900 transition-colors"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {category.name}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Collections Section */}
+                <div className="space-y-3">
+                  <h3 className="text-lg font-bold text-gray-900">Collections</h3>
+                  <div className="pl-4 space-y-2">
+                    {collectionsCategories.map((category) => (
+                      <a
+                        key={category.name}
+                        href={category.href}
+                        className="block text-base text-gray-700 hover:text-gray-900 transition-colors"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {category.name}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                <a
+                  href="#for-her"
+                  className="block text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  For Her
+                </a>
+
+                {/* Account */}
+                <div className="pt-6 border-t border-gray-200">
+                  <a
+                    href="/login"
+                    className="flex items-center gap-3 text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <User className="h-5 w-5" />
+                    Account
+                  </a>
+                </div>
+              </nav>
             </div>
           </div>
         </div>

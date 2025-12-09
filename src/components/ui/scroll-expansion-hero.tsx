@@ -161,7 +161,7 @@ const ScrollExpandMedia = ({
             <img
               src={bgImageSrc}
               alt='Background'
-              className='w-screen h-screen object-cover object-center'
+              className='w-full h-screen object-cover object-center'
             />
             <div className='absolute inset-0 bg-black/10' />
           </motion.div>
