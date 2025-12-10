@@ -7,11 +7,16 @@ export default defineConfig({
   server: {
     host: "::",
     port: 8080,
+    middlewareMode: false,
   },
   plugins: [react()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+  },
+  build: {
+    outDir: 'dist',
+    emptyOutDir: true,
   },
 });
