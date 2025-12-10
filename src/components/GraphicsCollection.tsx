@@ -7,7 +7,7 @@ const GraphicsCollection = () => {
         {/* Left - Image */}
         <div className="relative bg-gray-100 flex items-center justify-center">
           <img
-            src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?q=80&w=1200&auto=format&fit=crop"
+            src="/Black1standing.png"
             alt="Graphics Collection"
             className="w-full h-full object-cover"
           />

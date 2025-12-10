@@ -26,15 +26,31 @@ const FloatingNavBar = () => {
   const [showShopDropdown, setShowShopDropdown] = useState(false);
   const [showCollectionsDropdown, setShowCollectionsDropdown] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrollRotation, setScrollRotation] = useState(0);
   const shopTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const collectionsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          setIsScrolled(currentScrollY > 100);
+          
+          const scrollDelta = currentScrollY - lastScrollY.current;
+          setScrollRotation(prev => prev + scrollDelta * 0.5);
+          lastScrollY.current = currentScrollY;
+          
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -146,11 +162,14 @@ const FloatingNavBar = () => {
 
             {/* Center Logo */}
             <div className="absolute left-1/2 transform -translate-x-1/2">
-              <a href="/" className="flex items-center cursor-pointer hover:opacity-80 transition-opacity">
+              <a href="/" className="flex items-center cursor-pointer group">
                 <img 
                   src={isScrolled ? "/CropCenter.png" : "/Logo.png"}
-                  alt="STREETWEAR Logo" 
-                  className="h-10 w-auto transition-all duration-300"
+                  alt="SNTCH.CO Logo" 
+                  className="h-10 w-auto transition-all duration-300 will-change-transform"
+                  style={{
+                    transform: `rotate(${scrollRotation}deg)`,
+                  }}
                 />
               </a>
             </div>

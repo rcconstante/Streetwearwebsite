@@ -10,6 +10,7 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import Newsletter from '@/components/Newsletter';
 import BrandSection from '@/components/BrandSection';
 import Footer from '@/components/Footer';
+import CustomCursor from '@/components/CustomCursor';
 
 const Index = () => {
   useEffect(() => {
@@ -18,6 +19,7 @@ const Index = () => {
 
   return (
     <div className='min-h-screen bg-background overflow-x-hidden'>
+      <CustomCursor />
       <FloatingNavBar />
       
       <SimpleHero />

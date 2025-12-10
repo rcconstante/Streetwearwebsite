@@ -36,7 +36,7 @@ const BlanksCollection = () => {
         {/* Right - Image */}
         <div className="relative bg-gray-100 flex items-center justify-center order-1 md:order-2">
           <img
-            src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1200&auto=format&fit=crop"
+            src="/White1standing.png"
             alt="Blanks Collection"
             className="w-full h-full object-cover"
           />
