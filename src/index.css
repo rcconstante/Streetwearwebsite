@@ -99,34 +99,11 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     overflow-x: hidden;
-    cursor: none;
   }
 
   html {
     scroll-behavior: smooth;
     overflow-x: hidden;
-  }
-
-  * {
-    cursor: none !important;
-  }
-
-  /* Performance optimizations */
-  @media (prefers-reduced-motion: reduce) {
-    * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-    
-    body {
-      cursor: auto;
-    }
-    
-    * {
-      cursor: auto !important;
-    }
   }
 }
 
@@ -142,5 +119,20 @@
 
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  @keyframes fadeInScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-fadeInScale {
+    animation: fadeInScale 0.5s ease-out forwards;
   }
 }

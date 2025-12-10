@@ -26,31 +26,15 @@ const FloatingNavBar = () => {
   const [showShopDropdown, setShowShopDropdown] = useState(false);
   const [showCollectionsDropdown, setShowCollectionsDropdown] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [scrollRotation, setScrollRotation] = useState(0);
   const shopTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const collectionsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const lastScrollY = useRef(0);
 
   useEffect(() => {
-    let ticking = false;
-    
     const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const currentScrollY = window.scrollY;
-          setIsScrolled(currentScrollY > 100);
-          
-          const scrollDelta = currentScrollY - lastScrollY.current;
-          setScrollRotation(prev => prev + scrollDelta * 0.5);
-          lastScrollY.current = currentScrollY;
-          
-          ticking = false;
-        });
-        ticking = true;
-      }
+      setIsScrolled(window.scrollY > 100);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -166,10 +150,11 @@ const FloatingNavBar = () => {
                 <img 
                   src={isScrolled ? "/CropCenter.png" : "/Logo.png"}
                   alt="SNTCH.CO Logo" 
-                  className="h-10 w-auto transition-all duration-300 will-change-transform"
-                  style={{
-                    transform: `rotate(${scrollRotation}deg)`,
-                  }}
+                  className={`h-10 w-auto transition-all duration-500 ease-out group-hover:scale-110 ${
+                    isScrolled 
+                      ? 'animate-fadeInScale' 
+                      : 'scale-100 opacity-100'
+                  }`}
                 />
               </a>
             </div>
