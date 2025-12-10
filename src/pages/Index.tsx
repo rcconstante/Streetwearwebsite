@@ -5,8 +5,10 @@ import NewArrivals from '@/components/NewArrivals';
 import ServicesSection from '@/components/ServicesSection';
 import GraphicsCollection from '@/components/GraphicsCollection';
 import BlanksCollection from '@/components/BlanksCollection';
+import ShopInstagram from '@/components/ShopInstagram';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import Newsletter from '@/components/Newsletter';
+import BrandSection from '@/components/BrandSection';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -25,8 +27,10 @@ const Index = () => {
       <ServicesSection />
       <GraphicsCollection />
       <BlanksCollection />
+      <ShopInstagram />
       <TestimonialsSection />
       <Newsletter />
+      <BrandSection />
       <Footer />
     </div>
   );

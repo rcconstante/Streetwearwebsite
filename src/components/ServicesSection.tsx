@@ -23,7 +23,7 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section className="bg-white py-16 md:py-20">
+    <section className="bg-white py-16 md:py-20 border-t border-gray-200">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-8 md:gap-12">
           {services.map((service, index) => {
@@ -34,10 +34,10 @@ const ServicesSection = () => {
                   <Icon className="w-12 h-12 md:w-14 md:h-14 text-gray-900" strokeWidth={1.5} />
                 </div>
                 <div className="space-y-2">
-                  <h3 className="text-lg md:text-xl font-bold tracking-wide uppercase">
+                  <h3 className="text-base md:text-lg font-light tracking-widest uppercase">
                     {service.title}
                   </h3>
-                  <p className="text-xs md:text-sm text-gray-600 leading-relaxed max-w-xs mx-auto">
+                  <p className="text-xs text-gray-600 leading-relaxed max-w-xs mx-auto">
                     {service.subtitle}
                   </p>
                   {service.linkText && (

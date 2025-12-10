@@ -32,18 +32,18 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-gray-900 text-white border-t border-gray-800">
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           {/* Company */}
           <div>
-            <h3 className="font-bold text-lg mb-6">Company</h3>
+            <h3 className="font-light text-base tracking-widest mb-6 uppercase">Company</h3>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-gray-400 hover:text-white transition-colors text-sm tracking-wide"
                   >
                     {link.name}
                   </a>
@@ -54,13 +54,13 @@ const Footer = () => {
 
           {/* Customer Service */}
           <div>
-            <h3 className="font-bold text-lg mb-6">Customer Service</h3>
+            <h3 className="font-light text-base tracking-widest mb-6 uppercase">Customer Service</h3>
             <ul className="space-y-3">
               {footerLinks.customerService.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-gray-400 hover:text-white transition-colors text-sm tracking-wide"
                   >
                     {link.name}
                   </a>
@@ -71,7 +71,7 @@ const Footer = () => {
 
           {/* Social */}
           <div>
-            <h3 className="font-bold text-lg mb-6">Follow Us</h3>
+            <h3 className="font-light text-base tracking-widest mb-6 uppercase">Follow Us</h3>
             <div className="flex space-x-4">
               {socialLinks.map((social) => {
                 const Icon = social.icon;

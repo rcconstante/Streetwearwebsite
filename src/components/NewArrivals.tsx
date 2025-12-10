@@ -76,11 +76,11 @@ const NewArrivals = () => {
   };
 
   return (
-    <section id="new-arrivals" className="py-20 bg-white">
+    <section id="new-arrivals" className="py-20 bg-white border-t border-gray-200">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold tracking-tight mb-4">New Arrivals</h2>
-          <p className="text-muted-foreground text-lg">
+          <h2 className="text-2xl md:text-2xl font-light tracking-widest mb-2 uppercase">New Arrivals</h2>
+          <p className="text-gray-600 text-xs tracking-wide">
             Discover our latest collection of premium streetwear
           </p>
         </div>
@@ -129,10 +129,10 @@ const NewArrivals = () => {
                     )}
                   </div>
                   <div className="p-6">
-                    <h3 className="font-semibold text-lg mb-2 group-hover:text-gray-600 transition-colors">
+                    <h3 className="font-normal text-sm mb-2 group-hover:text-gray-600 transition-colors tracking-wide">
                       {product.name}
                     </h3>
-                    <p className="text-xl font-bold">${product.price}</p>
+                    <p className="text-base font-normal">${product.price}</p>
                   </div>
                 </CardContent>
               </Card>

@@ -87,11 +87,11 @@ const FloatingNavBar = () => {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-20">
             {/* Left Navigation - Desktop */}
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
               <a
                 href="#new-arrivals"
-                className={`text-sm font-medium tracking-wide transition-colors hover:text-gray-600 ${
-                  isScrolled ? 'text-gray-900' : 'text-white'
+                className={`text-xs lg:text-sm font-normal tracking-wider transition-colors hover:text-gray-500 ${
+                  isScrolled ? 'text-gray-800' : 'text-white'
                 }`}
               >
                 New Arrivals
@@ -104,12 +104,12 @@ const FloatingNavBar = () => {
                 onMouseLeave={handleShopLeave}
               >
                 <button
-                  className={`text-sm font-medium tracking-wide transition-colors hover:text-gray-600 flex items-center gap-1 ${
-                    isScrolled ? 'text-gray-900' : 'text-white'
+                  className={`text-xs lg:text-sm font-normal tracking-wider transition-colors hover:text-gray-500 flex items-center gap-1 ${
+                    isScrolled ? 'text-gray-800' : 'text-white'
                   }`}
                 >
                   Shop
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-3 h-3" />
                 </button>
               </div>
 
@@ -120,23 +120,14 @@ const FloatingNavBar = () => {
                 onMouseLeave={handleCollectionsLeave}
               >
                 <button
-                  className={`text-sm font-medium tracking-wide transition-colors hover:text-gray-600 flex items-center gap-1 ${
-                    isScrolled ? 'text-gray-900' : 'text-white'
+                  className={`text-xs lg:text-sm font-normal tracking-wider transition-colors hover:text-gray-500 flex items-center gap-1 ${
+                    isScrolled ? 'text-gray-800' : 'text-white'
                   }`}
                 >
                   Collections
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-3 h-3" />
                 </button>
               </div>
-
-              <a
-                href="#for-her"
-                className={`text-sm font-medium tracking-wide transition-colors hover:text-gray-600 ${
-                  isScrolled ? 'text-gray-900' : 'text-white'
-                }`}
-              >
-                For Her
-              </a>
             </div>
 
             {/* Mobile Menu Button */}
@@ -214,17 +205,17 @@ const FloatingNavBar = () => {
       {/* Shop Dropdown - Full Width */}
       {showShopDropdown && (
         <div
-          className="fixed top-20 left-0 right-0 z-40 bg-white shadow-lg border-t border-gray-100"
+          className="fixed top-20 left-0 right-0 z-40 bg-white shadow-sm border-t border-gray-200"
           onMouseEnter={handleShopEnter}
           onMouseLeave={handleShopLeave}
         >
-          <div className="container mx-auto px-4 py-8">
-            <div className="flex flex-wrap gap-x-12 gap-y-4 justify-center">
+          <div className="container mx-auto px-4 py-10">
+            <div className="flex flex-wrap gap-x-8 gap-y-3 justify-start max-w-4xl">
               {shopCategories.map((category) => (
                 <a
                   key={category.name}
                   href={category.href}
-                  className="text-base text-gray-900 hover:text-gray-600 transition-colors font-medium"
+                  className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-light tracking-wide"
                 >
                   {category.name}
                 </a>
@@ -237,17 +228,17 @@ const FloatingNavBar = () => {
       {/* Collections Dropdown - Full Width */}
       {showCollectionsDropdown && (
         <div
-          className="fixed top-20 left-0 right-0 z-40 bg-white shadow-lg border-t border-gray-100"
+          className="fixed top-20 left-0 right-0 z-40 bg-white shadow-sm border-t border-gray-200"
           onMouseEnter={handleCollectionsEnter}
           onMouseLeave={handleCollectionsLeave}
         >
-          <div className="container mx-auto px-4 py-8">
-            <div className="flex flex-wrap gap-x-12 gap-y-4 justify-center">
+          <div className="container mx-auto px-4 py-10">
+            <div className="flex flex-wrap gap-x-8 gap-y-3 justify-start max-w-4xl">
               {collectionsCategories.map((category) => (
                 <a
                   key={category.name}
                   href={category.href}
-                  className="text-base text-gray-900 hover:text-gray-600 transition-colors font-medium"
+                  className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-light tracking-wide"
                 >
                   {category.name}
                 </a>
@@ -324,14 +315,6 @@ const FloatingNavBar = () => {
                     ))}
                   </div>
                 </div>
-
-                <a
-                  href="#for-her"
-                  className="block text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  For Her
-                </a>
 
                 {/* Account */}
                 <div className="pt-6 border-t border-gray-200">

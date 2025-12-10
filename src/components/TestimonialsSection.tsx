@@ -29,13 +29,13 @@ const TestimonialsSection = () => {
   ];
 
   return (
-    <section className="bg-gray-50 py-20 md:py-28">
+    <section className="bg-gray-50 py-20 md:py-28 border-t border-gray-200">
       <div className="container mx-auto px-4">
         <div className="mb-12 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-wide uppercase mb-4">
+          <h2 className="text-xl md:text-2xl font-light tracking-widest uppercase mb-2">
             What Our Customers Say
           </h2>
-          <p className="text-sm md:text-base text-gray-600">
+          <p className="text-xs text-gray-600 tracking-wide">
             Join thousands of satisfied streetwear enthusiasts
           </p>
         </div>
